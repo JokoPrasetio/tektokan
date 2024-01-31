@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #BFD8AF;
+}
+.card{
+    margin-top: 4.3rem;
+}
+.card-header h5{
+    font-size: 1.3rem;
+    margin-top: 1.3rem;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.card-header strong{
+    font-size: 0.75rem;
+}
