@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\HelperEvent;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -25,7 +26,15 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/datatable-user', [UserController::class, 'DatatableUser']);
 
     Route::resource('/message', MessageController::class);
-    Route::get('/datatable-message', [MessageController::class, 'datatableMessage']);
+
+    Route::get('/message-out', [MessageController::class, 'messageOut']);
+    Route::get('/datatable-message-out', [MessageController::class, 'datatableMessageOut']);
+    Route::get('/datatable-message-in', [MessageController::class, 'datatableMessageIn']);
 
     Route::post('/logout', [UserController::class, 'logout']);
+});
+
+Route::get('/send-event', function(){
+    $text = "hello joko";
+    broadcast(new HelperEvent($text));
 });

@@ -1,4 +1,5 @@
 @extends('content.main')
+@vite('resources/css/app.css')
 @section('body_content')
     <div class="container-xl mt-5 px-4">
         <div class="card mb-4">
@@ -18,7 +19,16 @@
         </div>
     </div>
 
-
+    @vite('resources/js/app.js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+        Echo.channel("hello")
+            .listen("HelperEvent", (e) => {
+                console.log("event from hello world");
+                console.log(e);
+    });
+})
+    </script>
     <script src="/js/user/_init.js"></script>
     <script src="/js/user/dt.js"></script>
 @endsection

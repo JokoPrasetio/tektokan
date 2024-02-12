@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'file_message' => [
+            'driver' => 'local',
+            'root' => public_path('assets') . '/file/message/user',
+            'url' => env('APP_URL') . '/assets/file/message/user',
+            'visibility' => 'public'
+        ],
+
     ],
 
     /*

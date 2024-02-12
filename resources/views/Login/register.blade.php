@@ -38,6 +38,7 @@
                             </div>
                             <div class="button">
                                 <button class="btn btn-success mt-3" href="submit">Create Acount</button>
+                                <a href="/login" class="btn btn-outline-success mt-3" >Login</a>
                             </div>
                         </form>
                     </div>
