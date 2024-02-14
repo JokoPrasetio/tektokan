@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/datatable-message-in', [MessageController::class, 'datatableMessageIn']);
 
     Route::post('/logout', [UserController::class, 'logout']);
+    Route::get('/notif-message-in', [MessageController::class, 'NotifMessageIn']);
 });
 
 Route::get('/send-event', function(){

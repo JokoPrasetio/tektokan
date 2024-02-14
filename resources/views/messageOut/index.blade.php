@@ -12,7 +12,7 @@
         <div class="card-body">
             <ul class="nav nav-tabs mb-3">
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="/message">Surat Masuk</a>
+                  <a class="nav-link" aria-current="page" href="/message">Surat Masuk  <span class="badge badge-canter rounded-circle bg-danger ms-2" id="surat_masuk">1</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/message-out">Surat Keluar</a>

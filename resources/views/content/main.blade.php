@@ -35,11 +35,23 @@
 </head>
 
 <body>
+    @vite('resources/css/app.css')
     @include('content.nav')
     @yield('body_content')
 
 
 
+
+    @vite('resources/js/app.js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+        Echo.channel("hello")
+            .listen("HelperEvent", (e) => {
+                console.log("event from hello world");
+                console.log(e);
+    });
+})
+    </script>
 </body>
 
 </html>

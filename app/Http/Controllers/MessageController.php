@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotifEvent;
 use App\Models\message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,13 +44,20 @@ class MessageController extends Controller
                 'message' => 'required',
             ]);
             $validate['by_send'] = auth()->user()->id;
+            $name = User::where('id', $validate['by_send'])->first();
+            $validate['by_name'] = $name->username;
             if(request()->file('file')){
                 $file = request()->file('file');
                 $fileName =Str::random(20). '.'  . $file->getClientOriginalExtension();
                 Storage::disk('file_message')->put($fileName, file_get_contents($file));
                 $validate['file'] = $fileName;
             }
-            message::create($validate);
+            $message = message::create($validate);
+
+            $id = $request->user_id;
+            $notif = message::where('user_id', $id)->get()->count();
+            broadcast(new NotifEvent(['message' => $message, 'notifCount' => $notif]));
+
             return back()->with(['alertSuccess' => 'Successfully send message']);
         } catch (\Throwable $th) {
             return back()->with(['alertError' => 'Error' .$th]);
@@ -103,9 +111,15 @@ class MessageController extends Controller
         $id = auth()->user()->id;
         return message::where('by_send', $id)->orderBy('created_at', 'DESC')->get();
     }
-    
+
     public function datatableMessageIn(){
         $id = auth()->user()->id;
         return message::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
+    }
+
+    public function NotifMessageIn(){
+        $id = auth()->user()->id;
+        $notif = message::where('user_id', $id)->get()->count();
+        return response()->json(['notif' => $notif]);
     }
 }
